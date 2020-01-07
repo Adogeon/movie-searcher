@@ -7,3 +7,8 @@ test('renders learn react link', () => {
   const linkElement = getByText(/learn react/i);
   expect(linkElement).toBeInTheDocument();
 });
+
+//App should render with three components
+// 1) search bar
+// 2) submit button
+// 3) result area

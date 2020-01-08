@@ -2,9 +2,9 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-const SearchForm = () => {
+const SearchForm = props => {
   return (
-    <Form>
+    <Form onSubmit={props.handleSubmit}>
       <Form.Row>
         <Form.Group controlId="searchBar">
           <Form.Control type="text" placeholder="Search" />

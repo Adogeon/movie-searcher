@@ -4,3 +4,5 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
 
+const fetch = require("jest-fetch-mock");
+jest.setMock("node-fetch", fetch);

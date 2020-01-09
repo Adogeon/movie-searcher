@@ -1,22 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import Pagination from "react-bootstrap/Pagination";
 
 const PaginationBar = props => {
-  const { numberOfPages, handleOnPageClick } = props;
-
-  const [state, setState] = useState({
-    currentPage: 1,
-    lastPage: numberOfPages
-  });
-
-  const { currentPage, lastPage } = state;
-
-  const handleOnClick = event => {
-    setState({
-      currentPage: event.target.id
-    });
-    handleOnPageClick(state.currentPage);
-  };
+  const { lastPage, handleOnPageClick, currentPage } = props;
 
   if (lastPage <= 7) {
     let items = [];
@@ -26,7 +12,7 @@ const PaginationBar = props => {
           key={i}
           id={i}
           active={i === currentPage}
-          onClick={handleOnClick}
+          onClick={handleOnPageClick}
         >
           {i}
         </Pagination.Item>
@@ -38,85 +24,93 @@ const PaginationBar = props => {
       <Pagination>
         {currentPage === 1 ? (
           <>
-            <Pagination.Item active id={1} onClick={handleOnClick}>
+            <Pagination.Item active id={1} onClick={handleOnPageClick}>
               {1}
             </Pagination.Item>
-            <Pagination.Item id={2} onClick={handleOnClick}>
+            <Pagination.Item id={2} onClick={handleOnPageClick}>
               {2}
             </Pagination.Item>
-            <Pagination.Item id={3} onClick={handleOnClick}>
+            <Pagination.Item id={3} onClick={handleOnPageClick}>
               {3}
             </Pagination.Item>
             <Pagination.Ellipsis disabled></Pagination.Ellipsis>
-            <Pagination.Item id={lastPage} onClick={handleOnClick}>
+            <Pagination.Item id={lastPage} onClick={handleOnPageClick}>
               {lastPage}
             </Pagination.Item>
           </>
         ) : currentPage === 2 ? (
           <>
-            <Pagination.Item id={1} onClick={handleOnClick}>
+            <Pagination.Item id={1} onClick={handleOnPageClick}>
               {1}
             </Pagination.Item>
-            <Pagination.Item active id={2} onClick={handleOnClick}>
+            <Pagination.Item active id={2} onClick={handleOnPageClick}>
               {2}
             </Pagination.Item>
-            <Pagination.Item id={3} onClick={handleOnClick}>
+            <Pagination.Item id={3} onClick={handleOnPageClick}>
               {3}
             </Pagination.Item>
             <Pagination.Ellipsis disabled></Pagination.Ellipsis>
-            <Pagination.Item id={lastPage} onClick={handleOnClick}>
+            <Pagination.Item id={lastPage} onClick={handleOnPageClick}>
               {lastPage}
             </Pagination.Item>
           </>
         ) : currentPage === lastPage - 1 ? (
           <>
-            <Pagination.Item id={1} onClick={handleOnClick}>
+            <Pagination.Item id={1} onClick={handleOnPageClick}>
               {1}
             </Pagination.Item>
             <Pagination.Ellipsis disabled></Pagination.Ellipsis>
-            <Pagination.Item id={lastPage - 2} onClick={handleOnClick}>
+            <Pagination.Item id={lastPage - 2} onClick={handleOnPageClick}>
               {lastPage - 2}
             </Pagination.Item>
-            <Pagination.Item active id={lastPage - 1} onClick={handleOnClick}>
+            <Pagination.Item
+              active
+              id={lastPage - 1}
+              onClick={handleOnPageClick}
+            >
               {lastPage - 1}
             </Pagination.Item>
-            <Pagination.Item id={lastPage} onClick={handleOnClick}>
+            <Pagination.Item id={lastPage} onClick={handleOnPageClick}>
               {lastPage}
             </Pagination.Item>
           </>
         ) : currentPage === lastPage ? (
           <>
-            <Pagination.Item id={1} onClick={handleOnClick}>
+            <Pagination.Item id={1} onClick={handleOnPageClick}>
               {1}
             </Pagination.Item>
             <Pagination.Ellipsis disabled></Pagination.Ellipsis>
-            <Pagination.Item id={lastPage - 2} onClick={handleOnClick}>
+            <Pagination.Item id={lastPage - 2} onClick={handleOnPageClick}>
               {lastPage - 2}
             </Pagination.Item>
-            <Pagination.Item id={lastPage - 1} onClick={handleOnClick}>
+            <Pagination.Item id={lastPage - 1} onClick={handleOnPageClick}>
               {lastPage - 1}
             </Pagination.Item>
-            <Pagination.Item active id={lastPage} onClick={handleOnClick}>
+            <Pagination.Item active id={lastPage} onClick={handleOnPageClick}>
               {lastPage}
             </Pagination.Item>
           </>
         ) : (
           <>
-            <Pagination.Item id={1} onClick={handleOnClick}>
+            <Pagination.Item id={1} onClick={handleOnPageClick}>
               {1}
             </Pagination.Item>
             <Pagination.Ellipsis disabled></Pagination.Ellipsis>
-            <Pagination.Item id={currentPage - 1} onClick={handleOnClick}>
+            <Pagination.Item id={currentPage - 1} onClick={handleOnPageClick}>
               {currentPage - 1}
             </Pagination.Item>
-            <Pagination.Item active id={currentPage} onClick={handleOnClick}>
+            <Pagination.Item
+              active
+              id={currentPage}
+              onClick={handleOnPageClick}
+            >
               {currentPage}
             </Pagination.Item>
-            <Pagination.Item id={currentPage + 1} onClick={handleOnClick}>
+            <Pagination.Item id={currentPage + 1} onClick={handleOnPageClick}>
               {currentPage + 1}
             </Pagination.Item>
             <Pagination.Ellipsis disabled></Pagination.Ellipsis>
-            <Pagination.Item id={lastPage} onClick={handleOnClick}>
+            <Pagination.Item id={lastPage} onClick={handleOnPageClick}>
               {lastPage}
             </Pagination.Item>
           </>

@@ -1,34 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import MovieCard from "./MovieCard";
 import PaginationBar from "./PaginationBar";
+import { searchWithPagination } from "../util/API";
 
-const resultArea = props => {
-  const {
-    isValid,
-    movieIdArray,
-    isPagination,
-    numberOfPages,
-    handlePaginationClick,
-    errors
-  } = props;
+const ResultArea = props => {
+  const { pagination, numberOfPages, searchURL } = props.data;
+
+  const [pageNumber, setPageNumber] = useState(1);
+  const [movieArray, setMovieArray] = useState([]);
+
+  useEffect(() => {
+    const fetchPageMovieId = async () => {
+      const result = await searchWithPagination(searchURL, pageNumber);
+      setMovieArray(result);
+    };
+    fetchPageMovieId();
+  }, [pageNumber, searchURL]);
+
+  const handlePaginationClick = event => {
+    setPageNumber(event.target.id);
+  };
 
   return (
     <Card>
       <Card.Body>
-        {isValid ? (
-          movieIdArray.map(movieId => {
-            return <MovieCard data={movieId} key={movieId}></MovieCard>;
-          })
-        ) : (
-          <div> {errors} </div>
-        )}
+        {movieArray.map(movieId => {
+          return <MovieCard data={movieId} key={movieId}></MovieCard>;
+        })}
       </Card.Body>
-      {isPagination && (
+      {pagination && (
         <Card.Footer>
           <PaginationBar
             handleOnPageClick={handlePaginationClick}
-            items={numberOfPages}
+            lastPage={numberOfPages}
           ></PaginationBar>
         </Card.Footer>
       )}
@@ -36,4 +41,4 @@ const resultArea = props => {
   );
 };
 
-export default resultArea;
+export default ResultArea;

@@ -11,8 +11,11 @@ const MovieCard = props => {
       const result = await getOneById(data);
       setMovieInfo(result);
     };
+    console.log("get call");
     fetchData();
   });
+
+  console.log(movieInfo);
 
   if (movieInfo.errors) {
     return <div>{movieInfo.errors}</div>;

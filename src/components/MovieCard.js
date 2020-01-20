@@ -3,36 +3,61 @@ import { getOneById } from "../util/API";
 import Card from "react-bootstrap/Card";
 
 const MovieCard = props => {
-  const { data } = props;
-  const { movieInfo, setMovieInfo } = useState({});
+  const { movieId } = props;
+  const [movieInfo, setMovieInfo] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await getOneById(data);
-      setMovieInfo(result);
+    let didCancel = false;
+    const fetchData = async data => {
+      !didCancel && setIsLoading(true);
+      try {
+        const result = await getOneById(data);
+        !didCancel && setMovieInfo(result);
+      } catch (error) {
+        setMovieInfo({ errors: error });
+      } finally {
+        !didCancel && setIsLoading(false);
+      }
     };
-    console.log("get call");
-    fetchData();
-  });
+    if (movieId) {
+      fetchData(movieId);
+    } else {
+      setMovieInfo({ errors: "Don't have movie id" });
+    }
 
-  console.log(movieInfo);
+    return () => {
+      didCancel = true;
+    };
+  }, [movieId]);
 
-  if (movieInfo.errors) {
-    return <div>{movieInfo.errors}</div>;
-  } else {
-    const { Title, Year, Metascore, Plot } = movieInfo;
-
-    return (
-      <Card>
-        <Card.Header>{Title}</Card.Header>
-        <Card.Body>
-          <div>{Plot}</div>
-          <div>{Metascore}</div>
-        </Card.Body>
-        <Card.Footer>Released in {Year}</Card.Footer>
-      </Card>
-    );
-  }
+  return (
+    <Card>
+      {isLoading ? (
+        <>
+          <Card.Body>Loading ... </Card.Body>
+        </>
+      ) : movieInfo.errors ? (
+        <>
+          <Card.Header>Error</Card.Header>
+          <Card.Body>{movieInfo.errors}</Card.Body>
+        </>
+      ) : (
+        <>
+          <Card.Header>
+            <span className="movie-title">{movieInfo.Title}</span>
+          </Card.Header>
+          <Card.Body>
+            <div className="movie-plot">{movieInfo.Plot}</div>
+            <div className="movie-metascore">{movieInfo.Metascore}</div>
+          </Card.Body>
+          <Card.Footer>
+            Released in <span className="movie-year">{movieInfo.Year}</span>
+          </Card.Footer>
+        </>
+      )}
+    </Card>
+  );
 };
 
 export default MovieCard;

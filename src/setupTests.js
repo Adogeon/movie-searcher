@@ -10,3 +10,4 @@ import Adapter from "enzyme-adapter-react-16";
 //jest.setMock("node-fetch", fetch);
 
 configure({ adapter: new Adapter() });
+

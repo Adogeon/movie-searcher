@@ -34,6 +34,7 @@ const ResultArea = props => {
           <PaginationBar
             handleOnPageClick={handlePaginationClick}
             lastPage={numberOfPages}
+            currentPage={pageNumber}
           ></PaginationBar>
         </Card.Footer>
       )}

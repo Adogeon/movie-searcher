@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { searchAndCheckForPagination } from "../util/API";
-import SearchForm from "./searchForm";
+import SearchForm from "./SearchForm";
 import ResultArea from "./ResultArea";
-import ErrorArea from "./ErrorArea";
+//import ErrorArea from "./ErrorArea";
 
 const MovieSearch = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [isValid, setIsValid] = useState(true);
+  const [isValid, setIsValid] = useState(false);
 
   const handleInputChange = event => {
     setSearchTerm(event.target.value);
@@ -18,9 +18,9 @@ const MovieSearch = () => {
     searchAndCheckForPagination(searchTerm).then(resultObject => {
       if (resultObject.errors) {
         setSearchResult(resultObject);
-        setIsValid(false);
       } else {
         setSearchResult(resultObject);
+        setIsValid(true);
       }
     });
   };
@@ -35,7 +35,8 @@ const MovieSearch = () => {
       {isValid ? (
         <ResultArea data={searchResult}></ResultArea>
       ) : (
-        <ErrorArea data={searchResult}></ErrorArea>
+        <></>
+        //<ErrorArea data={searchResult}></ErrorArea>
       )}
     </main>
   );

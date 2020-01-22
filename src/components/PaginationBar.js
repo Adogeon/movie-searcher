@@ -2,7 +2,10 @@ import React from "react";
 import Pagination from "react-bootstrap/Pagination";
 
 const PaginationBar = props => {
-  const { lastPage, handleOnPageClick, currentPage } = props;
+  const { handleOnPageClick } = props;
+
+  const lastPage = parseInt(props.lastPage);
+  const currentPage = parseInt(props.currentPage);
 
   if (lastPage <= 7) {
     let items = [];

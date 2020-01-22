@@ -8,16 +8,15 @@ const MovieCard = props => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    let didCancel = false;
     const fetchData = async data => {
-      !didCancel && setIsLoading(true);
+      setIsLoading(true);
       try {
         const result = await getOneById(data);
-        !didCancel && setMovieInfo(result);
+        setMovieInfo(result);
       } catch (error) {
         setMovieInfo({ errors: error });
       } finally {
-        !didCancel && setIsLoading(false);
+        setIsLoading(false);
       }
     };
     if (movieId) {
@@ -25,10 +24,6 @@ const MovieCard = props => {
     } else {
       setMovieInfo({ errors: "Don't have movie id" });
     }
-
-    return () => {
-      didCancel = true;
-    };
   }, [movieId]);
 
   return (

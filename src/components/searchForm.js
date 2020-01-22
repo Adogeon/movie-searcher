@@ -14,7 +14,9 @@ const SearchForm = props => {
             placeholder="Search"
           />
         </Form.Group>
-        <Button variant="secondary">Submit</Button>
+        <Button variant="secondary" type="Submit">
+          Submit
+        </Button>
       </Form.Row>
     </Form>
   );

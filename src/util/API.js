@@ -1,4 +1,4 @@
-const requestURL = `http://omdbapi.com/?apikey=${process.env.OMDB_API_KEY}`;
+const requestURL = `http://omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_KEY}`;
 
 export const getOneById = async id => {
   try {
@@ -19,14 +19,14 @@ export const getOneById = async id => {
         imdbID
       } = data;
       const result = {
-        Title: Title, 
-        Year: Year, 
-        Rated:Rated,
-        Genre:Genre,
-        Director:Director,
-        Plot:Plot,
-        Metascore:Metascore,
-        Poster:Poster,
+        Title: Title,
+        Year: Year,
+        Rated: Rated,
+        Genre: Genre,
+        Director: Director,
+        Plot: Plot,
+        Metascore: Metascore,
+        Poster: Poster,
         id: imdbID
       };
       return result;

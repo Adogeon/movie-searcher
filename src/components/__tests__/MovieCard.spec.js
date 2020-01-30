@@ -16,7 +16,7 @@ describe("[Unit Test]/{React Component} Search Form ", () => {
   it("should first render with loading screen", async () => {
     let wrapper;
     await act(async () => {
-      wrapper = await mount(<MovieCard movieId={"test"} />);
+      wrapper = await mount(<MovieCard data={"test"} />);
     });
 
     expect(wrapper.find("CardBody").html()).toBe(
@@ -28,7 +28,7 @@ describe("[Unit Test]/{React Component} Search Form ", () => {
     let wrapper;
 
     await act(async () => {
-      wrapper = await mount(<MovieCard movieId={"test"} />);
+      wrapper = await mount(<MovieCard data={"test"} />);
     });
 
     setTimeout(() => {

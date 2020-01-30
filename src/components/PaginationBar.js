@@ -1,5 +1,4 @@
 import React from "react";
-import Pagination from "react-bootstrap/Pagination";
 
 const PaginationBar = props => {
   const { handleOnPageClick } = props;
@@ -11,114 +10,160 @@ const PaginationBar = props => {
     let items = [];
     for (let i = 1; i <= lastPage; i++) {
       items.push(
-        <Pagination.Item
-          key={i}
-          id={i}
-          active={i === currentPage}
-          onClick={handleOnPageClick}
-        >
-          {i}
-        </Pagination.Item>
+        <li>
+          <a>
+            className="pagination-item" key={i}
+            id={i}
+            active={i === currentPage}
+            onClick={handleOnPageClick}>{i}
+          </a>
+        </li>
       );
     }
-    return <Pagination>{items}</Pagination>;
+    return <ul className="pagination-bar">{items}</ul>;
   } else {
     return (
-      <Pagination>
+      <ul className="pagination-bar">
         {currentPage === 1 ? (
           <>
-            <Pagination.Item active id={1} onClick={handleOnPageClick}>
-              {1}
-            </Pagination.Item>
-            <Pagination.Item id={2} onClick={handleOnPageClick}>
-              {2}
-            </Pagination.Item>
-            <Pagination.Item id={3} onClick={handleOnPageClick}>
-              {3}
-            </Pagination.Item>
-            <Pagination.Ellipsis disabled></Pagination.Ellipsis>
-            <Pagination.Item id={lastPage} onClick={handleOnPageClick}>
-              {lastPage}
-            </Pagination.Item>
+            <li className="pagination-item">
+              <button active id={1} onClick={handleOnPageClick}>
+                {1}
+              </button>
+            </li>
+            <li className="pagination-item">
+              <button id={2} onClick={handleOnPageClick}>
+                {2}
+              </button>
+            </li>
+            <li className="pagination-item">
+              <button id={3} onClick={handleOnPageClick}>
+                {3}
+              </button>
+            </li>
+            <li className="pagination-item">
+              <button disabled>...</button>
+            </li>
+            <li className="pagination-item">
+              <button id={lastPage} onClick={handleOnPageClick}>
+                {lastPage}
+              </button>
+            </li>
           </>
         ) : currentPage === 2 ? (
           <>
-            <Pagination.Item id={1} onClick={handleOnPageClick}>
-              {1}
-            </Pagination.Item>
-            <Pagination.Item active id={2} onClick={handleOnPageClick}>
-              {2}
-            </Pagination.Item>
-            <Pagination.Item id={3} onClick={handleOnPageClick}>
-              {3}
-            </Pagination.Item>
-            <Pagination.Ellipsis disabled></Pagination.Ellipsis>
-            <Pagination.Item id={lastPage} onClick={handleOnPageClick}>
-              {lastPage}
-            </Pagination.Item>
+            <li className="pagination-item">
+              <button id={1} onClick={handleOnPageClick}>
+                {1}
+              </button>
+            </li>
+            <li className="pagination-item">
+              <button active id={2} onClick={handleOnPageClick}>
+                {2}
+              </button>
+            </li>
+            <li className="pagination-item">
+              <button id={3} onClick={handleOnPageClick}>
+                {3}
+              </button>
+            </li>
+            <li className="pagination-item">
+              <button disabled>...</button>
+            </li>
+            <li className="pagination-item">
+              <button id={lastPage} onClick={handleOnPageClick}>
+                {lastPage}
+              </button>
+            </li>
           </>
         ) : currentPage === lastPage - 1 ? (
           <>
-            <Pagination.Item id={1} onClick={handleOnPageClick}>
-              {1}
-            </Pagination.Item>
-            <Pagination.Ellipsis disabled></Pagination.Ellipsis>
-            <Pagination.Item id={lastPage - 2} onClick={handleOnPageClick}>
-              {lastPage - 2}
-            </Pagination.Item>
-            <Pagination.Item
-              active
-              id={lastPage - 1}
-              onClick={handleOnPageClick}
-            >
-              {lastPage - 1}
-            </Pagination.Item>
-            <Pagination.Item id={lastPage} onClick={handleOnPageClick}>
-              {lastPage}
-            </Pagination.Item>
+            <li className="pagination-item">
+              <button id={1} onClick={handleOnPageClick}>
+                {1}
+              </button>
+            </li>
+            <li className="pagination-item">
+              <button disabled>...</button>
+            </li>
+            <li className="pagination-item">
+              <button id={lastPage - 2} onClick={handleOnPageClick}>
+                {lastPage - 2}
+              </button>
+            </li>
+            <li className="pagination-item">
+              <button active id={lastPage - 1} onClick={handleOnPageClick}>
+                {lastPage - 1}
+              </button>
+            </li>
+            <li className="pagination-item">
+              <button id={lastPage} onClick={handleOnPageClick}>
+                {lastPage}
+              </button>
+            </li>
           </>
         ) : currentPage === lastPage ? (
           <>
-            <Pagination.Item id={1} onClick={handleOnPageClick}>
-              {1}
-            </Pagination.Item>
-            <Pagination.Ellipsis disabled></Pagination.Ellipsis>
-            <Pagination.Item id={lastPage - 2} onClick={handleOnPageClick}>
-              {lastPage - 2}
-            </Pagination.Item>
-            <Pagination.Item id={lastPage - 1} onClick={handleOnPageClick}>
-              {lastPage - 1}
-            </Pagination.Item>
-            <Pagination.Item active id={lastPage} onClick={handleOnPageClick}>
-              {lastPage}
-            </Pagination.Item>
+            <li className="pagination-item">
+              <button id={1} onClick={handleOnPageClick}>
+                {1}
+              </button>
+            </li>
+            <li className="pagination-item">
+              <button disabled>...</button>
+            </li>
+            <li className="pagination-item">
+              <button id={lastPage - 2} onClick={handleOnPageClick}>
+                {lastPage - 2}
+              </button>
+            </li>
+            <li className="pagination-item">
+              <button id={lastPage - 1} onClick={handleOnPageClick}>
+                {lastPage - 1}
+              </button>
+            </li>
+            <li className="pagination-item">
+              <button active id={lastPage} onClick={handleOnPageClick}>
+                {lastPage}
+              </button>
+            </li>
           </>
         ) : (
           <>
-            <Pagination.Item id={1} onClick={handleOnPageClick}>
-              {1}
-            </Pagination.Item>
-            <Pagination.Ellipsis disabled></Pagination.Ellipsis>
-            <Pagination.Item id={currentPage - 1} onClick={handleOnPageClick}>
-              {currentPage - 1}
-            </Pagination.Item>
-            <Pagination.Item
-              active
-              id={currentPage}
-              onClick={handleOnPageClick}
-            >
-              {currentPage}
-            </Pagination.Item>
-            <Pagination.Item id={currentPage + 1} onClick={handleOnPageClick}>
-              {currentPage + 1}
-            </Pagination.Item>
-            <Pagination.Ellipsis disabled></Pagination.Ellipsis>
-            <Pagination.Item id={lastPage} onClick={handleOnPageClick}>
-              {lastPage}
-            </Pagination.Item>
+            <li className="pagination-item">
+              <button id={1} onClick={handleOnPageClick}>
+                {1}
+              </button>
+            </li>
+            <li className="pagination-item">
+              <button disabled>...</button>
+            </li>
+            <li className="pagination-item">
+              <button id={currentPage - 1} onClick={handleOnPageClick}>
+                {currentPage - 1}
+              </button>
+            </li>
+            <li className="pagination-item">
+              <button active id={currentPage} onClick={handleOnPageClick}>
+                {currentPage}
+              </button>
+            </li>
+            <li className="pagination-item">
+              <button id={currentPage + 1} onClick={handleOnPageClick}>
+                {currentPage + 1}
+              </button>
+            </li>
+            <li className="pagination-item">
+              <button disabled>...</button>
+            </li>
+            <li className="pagination-item">
+              <button id={lastPage} onClick={handleOnPageClick}>
+                {lastPage}
+              </button>
+            </li>
           </>
         )}
-      </Pagination>
+      </ul>
     );
   }
 };

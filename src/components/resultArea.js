@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Card from "react-bootstrap/Card";
 import MovieCard from "./MovieCard";
 import PaginationBar from "./PaginationBar";
 import { searchWithPagination } from "../util/API";
@@ -9,11 +8,20 @@ const ResultArea = props => {
 
   const [pageNumber, setPageNumber] = useState(1);
   const [movieArray, setMovieArray] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchPageMovieId = async () => {
-      const result = await searchWithPagination(searchURL, pageNumber);
-      setMovieArray(result);
+      setIsLoading(true);
+      try {
+        const result = await searchWithPagination(searchURL, pageNumber);
+        console.log(result);
+        setMovieArray(result);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchPageMovieId();
   }, [pageNumber, searchURL]);
@@ -22,23 +30,31 @@ const ResultArea = props => {
     setPageNumber(event.target.id);
   };
 
-  return (
-    <Card>
-      <Card.Body>
+  return isLoading ? (
+    <div className="card">Loading ... </div>
+  ) : (
+    <div className="card">
+      <div
+        className="card-body"
+        style={{
+          "max-height": "83vh",
+          overflow: "scroll"
+        }}
+      >
         {movieArray.map(movieId => {
           return <MovieCard data={movieId} key={movieId}></MovieCard>;
         })}
-      </Card.Body>
+      </div>
       {pagination && (
-        <Card.Footer>
+        <div className="card-footer">
           <PaginationBar
             handleOnPageClick={handlePaginationClick}
             lastPage={numberOfPages}
             currentPage={pageNumber}
           ></PaginationBar>
-        </Card.Footer>
+        </div>
       )}
-    </Card>
+    </div>
   );
 };
 

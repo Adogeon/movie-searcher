@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getOneById } from "../util/API";
-import Card from "react-bootstrap/Card";
 
 const MovieCard = props => {
-  const { movieId } = props;
+  const { data } = props;
+  const [movieId, setMovieId] = useState(data);
   const [movieInfo, setMovieInfo] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async data => {
@@ -27,31 +27,31 @@ const MovieCard = props => {
   }, [movieId]);
 
   return (
-    <Card>
+    <div className="card" style={{ margin: "0.5rem" }}>
       {isLoading ? (
         <>
-          <Card.Body>Loading ... </Card.Body>
+          <div className={"card-body"}>Loading ... </div>
         </>
       ) : movieInfo.errors ? (
         <>
-          <Card.Header>Error</Card.Header>
-          <Card.Body>{movieInfo.errors}</Card.Body>
+          <div className="card-header">Error</div>
+          <div className="card-body">{movieInfo.errors}</div>
         </>
       ) : (
         <>
-          <Card.Header>
+          <div className="card-header">
             <span className="movie-title">{movieInfo.Title}</span>
-          </Card.Header>
-          <Card.Body>
+          </div>
+          <div className="card-body">
             <div className="movie-plot">{movieInfo.Plot}</div>
             <div className="movie-metascore">{movieInfo.Metascore}</div>
-          </Card.Body>
-          <Card.Footer>
+          </div>
+          <div className="card-footer">
             Released in <span className="movie-year">{movieInfo.Year}</span>
-          </Card.Footer>
+          </div>
         </>
       )}
-    </Card>
+    </div>
   );
 };
 

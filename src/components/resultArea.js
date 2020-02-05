@@ -5,15 +5,19 @@ import { searchWithPagination } from "../util/API";
 import styled from "styled-components";
 
 const ResultCard = styled.div`
-  background: #fff;
-  border-radius: 2px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  width: 100%
+  padding: 0.5rem;
+`;
+
+const ResultAreaWrapper = styled.div`
   width: 90vw;
   margin: auto;
-  padding: 0.5rem;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background: #fff;
+  border-radius: 2px;
 `;
 
 const ResultArea = props => {
@@ -46,7 +50,7 @@ const ResultArea = props => {
   return isLoading ? (
     <div className="card">Loading ... </div>
   ) : (
-    <div className="card">
+    <ResultAreaWrapper>
       <ResultCard>
         {movieArray.map(movieId => {
           return <MovieCard data={movieId} key={movieId}></MovieCard>;
@@ -61,7 +65,7 @@ const ResultArea = props => {
           ></PaginationBar>
         </div>
       )}
-    </div>
+    </ResultAreaWrapper>
   );
 };
 

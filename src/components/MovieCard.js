@@ -38,8 +38,31 @@ const CardBody = styled.div`
   margin: 0;
   line-height: 1.6;
   color: #000;
-  text-overflow: ellipsis;
   overflow: hidden;
+`;
+
+const Plot = styled.div`
+  overflow: hidden;
+  position: relative;
+  max-height: 8em;
+  text-align: justify;
+  margin-right: 0;
+  padding-right: 1em;
+  &:before {
+    content: "...";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: #fff;
+  }
 `;
 
 const CardSubTitle = styled.p`
@@ -93,7 +116,7 @@ const MovieCard = props => {
         <>
           <CardTitle>{movieInfo.Title}</CardTitle>
           <CardBody>
-            <div className="movie-plot">{movieInfo.Plot}</div>
+            <Plot>{movieInfo.Plot}</Plot>
             <div className="movie-metascore">
               Metascore: {movieInfo.Metascore}
             </div>

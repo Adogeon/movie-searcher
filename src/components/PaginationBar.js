@@ -1,4 +1,10 @@
 import React from "react";
+import styled from "styled-components";
+
+const PaginationWrapper = styled.ul`
+  list-style: none;
+  display: flex;
+`;
 
 const PaginationBar = props => {
   const { handleOnPageClick } = props;
@@ -11,19 +17,22 @@ const PaginationBar = props => {
     for (let i = 1; i <= lastPage; i++) {
       items.push(
         <li>
-          <a>
-            className="pagination-item" key={i}
+          <button
+            className="pagination-item"
+            key={i}
             id={i}
             active={i === currentPage}
-            onClick={handleOnPageClick}>{i}
-          </a>
+            onClick={handleOnPageClick}
+          >
+            {i}
+          </button>
         </li>
       );
     }
-    return <ul className="pagination-bar">{items}</ul>;
+    return <PaginationWrapper>{items}</PaginationWrapper>;
   } else {
     return (
-      <ul className="pagination-bar">
+      <PaginationWrapper>
         {currentPage === 1 ? (
           <>
             <li className="pagination-item">
@@ -163,7 +172,7 @@ const PaginationBar = props => {
             </li>
           </>
         )}
-      </ul>
+      </PaginationWrapper>
     );
   }
 };

@@ -7,7 +7,7 @@ import styled from "styled-components";
 const ResultCard = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 100%
   padding: 0.5rem;
 `;
@@ -15,9 +15,9 @@ const ResultCard = styled.div`
 const ResultAreaWrapper = styled.div`
   width: 90vw;
   margin: auto;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   background: #fff;
   border-radius: 2px;
+  border: 0px;
 `;
 
 const ResultArea = props => {
@@ -51,20 +51,20 @@ const ResultArea = props => {
     <div className="card">Loading ... </div>
   ) : (
     <ResultAreaWrapper>
+      {pagination && (
+        <PaginationBar
+          handleOnPageClick={handlePaginationClick}
+          lastPage={numberOfPages}
+          currentPage={pageNumber}
+        ></PaginationBar>
+      )}
       <ResultCard>
-        {movieArray.map(movieId => {
-          return <MovieCard data={movieId} key={movieId}></MovieCard>;
+        {movieArray.map(movieData => {
+          return (
+            <MovieCard data={movieData} key={movieData.imdbID}></MovieCard>
+          );
         })}
       </ResultCard>
-      {pagination && (
-        <div className="card-footer">
-          <PaginationBar
-            handleOnPageClick={handlePaginationClick}
-            lastPage={numberOfPages}
-            currentPage={pageNumber}
-          ></PaginationBar>
-        </div>
-      )}
     </ResultAreaWrapper>
   );
 };

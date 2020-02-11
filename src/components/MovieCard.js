@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { getOneById } from "../util/API";
+import React from "react";
 import styled from "styled-components";
 
 const StyledCard = styled.div`
@@ -7,11 +6,10 @@ const StyledCard = styled.div`
   border-radius: 2px;
   position: relative;
   display: grid;
-  grid-template-rows: 20% auto 20%;
-  margin: 1rem;
-  maring-bottom: 2rem;
-  height: 300px;
-  width: 300px;
+  grid-template-rows: auto 10%;
+  margin: 0.5rem 0;
+  width: 275px;
+  height: 475px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 `;
 
@@ -26,106 +24,57 @@ const CardTitle = styled.h2`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  vertical-align: top;
-  border-bottom: 1px solid grey;
 `;
 
 const CardBody = styled.div`
   font-size: 14px;
-  display: grid;
-  grid-template-rows: auto 20%;
-  padding: 0 10px;
+  display: flex;
+  justify-content: center;
+  padding: 3px;
   margin: 0;
   line-height: 1.6;
   color: #000;
   overflow: hidden;
 `;
 
-const Plot = styled.div`
-  overflow: hidden;
-  position: relative;
-  max-height: 8em;
-  text-align: justify;
-  margin-right: 0;
-  padding-right: 1em;
-  &:before {
-    content: "...";
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
-  &:after {
-    content: "";
-    position: absolute;
-    right: 0;
-    width: 1em;
-    height: 1em;
-    margin-top: 0.2em;
-    background: #fff;
-  }
+const CardLink = styled.a`
+  display: block;
 `;
 
-const CardSubTitle = styled.p`
-  font-size: 14px;
-  display: block;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  color: #111;
-  padding: 0 10px;
-  opacity: 50;
-  margin: 0;
+const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: gray;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  &:hover {
+    opacity: 0.25;
+  }
 `;
 
 const MovieCard = props => {
   const { data } = props;
-  const movieId = data;
-  const [movieInfo, setMovieInfo] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async data => {
-      setIsLoading(true);
-      try {
-        const result = await getOneById(data);
-        setMovieInfo(result);
-      } catch (error) {
-        setMovieInfo({ errors: error });
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    if (movieId) {
-      fetchData(movieId);
-    } else {
-      setMovieInfo({ errors: "Don't have movie id" });
-    }
-  }, [movieId]);
+  const { Poster, Title, imdbID } = data;
 
   return (
     <StyledCard>
-      {isLoading ? (
-        <>
-          <div className={"card-body"}>Loading ... </div>
-        </>
-      ) : movieInfo.errors ? (
-        <>
-          <CardTitle>Error</CardTitle>
-          <CardBody>{movieInfo.errors}</CardBody>
-        </>
-      ) : (
-        <>
-          <CardTitle>{movieInfo.Title}</CardTitle>
-          <CardBody>
-            <Plot>{movieInfo.Plot}</Plot>
-            <div className="movie-metascore">
-              Metascore: {movieInfo.Metascore}
-            </div>
-          </CardBody>
-          <CardSubTitle>
-            Released in <span className="movie-year">{movieInfo.Year}</span>
-          </CardSubTitle>
-        </>
-      )}
+      <CardBody>
+        <CardLink href={imdbID}>
+          <img
+            src={Poster}
+            alt={Title}
+            style={{
+              "max-width": "100%",
+              "max-height": "100%",
+              height: "auto"
+            }}
+          />
+          <Overlay />
+        </CardLink>
+      </CardBody>
+      <CardTitle>{Title}</CardTitle>
     </StyledCard>
   );
 };

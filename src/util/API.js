@@ -75,7 +75,7 @@ export const searchWithPagination = async (searchURL, pageNum = 1) => {
     } else {
       const result = [];
       data.Search.map(movie => {
-        return result.push(movie.imdbID);
+        return result.push(movie);
       });
       return result;
     }

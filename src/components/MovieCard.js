@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const StyledCard = styled.div`
   background: #fff;
@@ -37,7 +38,7 @@ const CardBody = styled.div`
   overflow: hidden;
 `;
 
-const CardLink = styled.a`
+const CardLink = styled(Link)`
   display: block;
 `;
 
@@ -61,7 +62,7 @@ const MovieCard = props => {
   return (
     <StyledCard>
       <CardBody>
-        <CardLink href={imdbID}>
+        <CardLink to={`/${imdbID}`}>
           <img
             src={Poster}
             alt={Title}

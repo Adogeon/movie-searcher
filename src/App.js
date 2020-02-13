@@ -1,19 +1,21 @@
 import React from "react";
-import MovieSearch from "./components/MovieSearch";
-import styled from "styled-components";
-
-const HeaderWrapper = styled.header`
-  display: flex;
-  justify-content: center;
-`;
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import MoviePage from "./pages/MoviePage";
 
 function App() {
   return (
     <div className="App">
-      <HeaderWrapper>
-        <h1>Movie Search</h1>
-      </HeaderWrapper>
-      <MovieSearch></MovieSearch>
+      <Router>
+        <Switch>
+          <Route exact path="/:id">
+            <MoviePage />
+          </Route>
+          <Route path="/">
+            <HomePage />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }

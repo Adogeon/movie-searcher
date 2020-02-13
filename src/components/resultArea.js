@@ -15,7 +15,7 @@ const ResultCard = styled.div`
 const ResultAreaWrapper = styled.div`
   width: 90vw;
   margin: auto;
-  background: #fff;
+  background: #eee;
   border-radius: 2px;
   border: 0px;
 `;

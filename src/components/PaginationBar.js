@@ -8,7 +8,7 @@ const PaginationWrapper = styled.ul`
 `;
 
 const PaginationItem = styled.li`
-  background: #fff;
+  background: #eee;
   font-size: 1.25rem;
   text-align: center;
   width: 2rem;

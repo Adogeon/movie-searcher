@@ -2,34 +2,12 @@ const requestURL = `http://omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API_
 
 export const getOneById = async id => {
   try {
-    const response = await fetch(`${requestURL}&i=${id}`);
+    const response = await fetch(`${requestURL}&i=${id}&plot=full`);
     const data = await response.json();
     if (data.Response === "False") {
       throw new Error(data.Error);
     } else {
-      const {
-        Title,
-        Year,
-        Rated,
-        Genre,
-        Director,
-        Plot,
-        Metascore,
-        Poster,
-        imdbID
-      } = data;
-      const result = {
-        Title: Title,
-        Year: Year,
-        Rated: Rated,
-        Genre: Genre,
-        Director: Director,
-        Plot: Plot,
-        Metascore: Metascore,
-        Poster: Poster,
-        id: imdbID
-      };
-      return result;
+      return data;
     }
   } catch (error) {
     return { errors: error };
